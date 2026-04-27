@@ -8,7 +8,7 @@ const bentoCards = [
     title: "Premium Visual Identity",
     description: "Glassmorphism, gradient matn va nozik effektlar bilan brendingizga zamonaviy ko'rinish bering.",
     className: "lg:col-span-4 lg:row-span-2",
-    image: "/project1.jpg", // Placeholder, replace with actual
+    image: "/project1.jpg",
     video: null,
   },
   {
@@ -20,7 +20,7 @@ const bentoCards = [
   },
   {
     title: "Responsive Experience",
-    description: "Har bir loyiha har bir ekran o'lchamida chiroyli va intuitiv ko'rinadi.",
+    description: "Har bir loyiha har bir ekran o'lchamida chiroyli va intuitiv ko'rinida.",
     className: "lg:col-span-2 lg:row-span-1",
     image: "/project3.jpg",
     video: null,
@@ -39,11 +39,12 @@ const fadeInUp = {
   animate: { opacity: 1, y: 0 },
 };
 
-const transition8 = { duration: 0.6, ease: "easeOut", delay: 0.5 };
-const transition9 = { duration: 0.6, ease: "easeOut", delay: 0.6 };
-const transition10 = { duration: 0.6, ease: "easeOut", delay: 0.7 };
-const transition11 = { duration: 0.6, ease: "easeOut", delay: 0.8 };
-const transition12 = { duration: 0.6, ease: "easeOut", delay: 0.9 };
+// Transitionlarni as const bilan belgilaymiz
+const transition8 = { duration: 0.8, ease: "easeOut" as const, delay: 0.2 };
+const transition9 = { duration: 0.6, ease: "easeOut" as const, delay: 0.6 };
+const transition10 = { duration: 0.6, ease: "easeOut" as const, delay: 0.7 };
+const transition11 = { duration: 0.6, ease: "easeOut" as const, delay: 0.8 };
+const transition12 = { duration: 0.6, ease: "easeOut" as const, delay: 0.9 };
 
 export default function BentoGrid() {
   return (
@@ -74,11 +75,18 @@ export default function BentoGrid() {
 
       <div className="grid gap-5 lg:grid-cols-6 lg:grid-rows-[220px_220px]">
         {bentoCards.map((card, index) => {
-          const cardTransitions = [transition11, transition12, { duration: 0.6, ease: "easeOut", delay: 1.0 }, { duration: 0.6, ease: "easeOut", delay: 1.1 }];
+          // BU YERDA: as const qo'shilgan variantlar
+          const cardTransitions = [
+            transition11, 
+            transition12, 
+            { duration: 0.6, ease: "easeOut" as const, delay: 1.0 }, 
+            { duration: 0.6, ease: "easeOut" as const, delay: 1.1 }
+          ];
+          
           return (
             <motion.article
               key={card.title}
-              className={`glass-card relative overflow-hidden p-6 transition duration-500 hover:scale-105 ${card.className}`}
+              className={`glass-card relative overflow-hidden p-6 transition duration-500 ${card.className}`}
               {...fadeInUp}
               transition={cardTransitions[index] || transition11}
               whileHover={{ scale: 1.05 }}

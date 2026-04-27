@@ -9,13 +9,13 @@ const fadeInUp = {
   animate: { opacity: 1, y: 0 },
 };
 
-const transition1 = { duration: 0.6, ease: "easeOut", delay: 0.1 };
-const transition2 = { duration: 0.6, ease: "easeOut", delay: 0.2 };
-const transition3 = { duration: 0.6, ease: "easeOut", delay: 0.3 };
-const transition4 = { duration: 0.6, ease: "easeOut", delay: 0.4 };
-const transition5 = { duration: 0.6, ease: "easeOut", delay: 0.5 };
-const transition6 = { duration: 0.6, ease: "easeOut", delay: 0.6 };
-const transition7 = { duration: 0.6, ease: "easeOut", delay: 0.7 };
+const transition1 = { duration: 0.6, ease: "easeOut" as const, delay: 0.1 };
+const transition2 = { duration: 0.6, ease: "easeOut" as const, delay: 0.2 };
+const transition3 = { duration: 0.6, ease: "easeOut" as const, delay: 0.3 };
+const transition4 = { duration: 0.6, ease: "easeOut" as const, delay: 0.4 };
+const transition5 = { duration: 0.6, ease: "easeOut" as const, delay: 0.5 };
+const transition6 = { duration: 0.6, ease: "easeOut" as const, delay: 0.6 };
+const transition7 = { duration: 0.6, ease: "easeOut" as const, delay: 0.7 };
 
 export default function Hero() {
   const mouseX = useMotionValue(0);

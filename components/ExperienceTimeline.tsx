@@ -26,7 +26,7 @@ const fadeInUp = {
   animate: { opacity: 1, y: 0 },
 };
 
-const transition = { duration: 0.6, ease: "easeOut", delay: 0.5 };
+const transition = { duration: 0.6, ease: "easeOut" as const, delay: 0.5 };
 
 export default function ExperienceTimeline() {
   const ref = useRef(null);
