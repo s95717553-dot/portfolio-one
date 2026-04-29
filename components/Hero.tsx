@@ -2,8 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
-import { Code, User, MessageCircle } from "lucide-react";
-
+import { Code, MessageCircle, ExternalLink } from "lucide-react";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -16,6 +15,20 @@ const transition4 = { duration: 0.6, ease: "easeOut" as const, delay: 0.4 };
 const transition5 = { duration: 0.6, ease: "easeOut" as const, delay: 0.5 };
 const transition6 = { duration: 0.6, ease: "easeOut" as const, delay: 0.6 };
 const transition7 = { duration: 0.6, ease: "easeOut" as const, delay: 0.7 };
+
+// Text reveal animation
+const textRevealVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      delay: i * 0.05,
+    },
+  }),
+};
 
 export default function Hero() {
   const mouseX = useMotionValue(0);
@@ -34,6 +47,9 @@ export default function Hero() {
     mouseX.set((e.clientX - centerX) / rect.width);
     mouseY.set((e.clientY - centerY) / rect.height);
   };
+
+  const titleText = "Salohiddin Sobirov";
+  const titleChars = titleText.split("");
 
   return (
     <section
@@ -60,15 +76,23 @@ export default function Hero() {
             >
               Premium Portfolio
             </motion.p>
-            <motion.h1
-              className="text-5xl font-semibold tracking-tight text-white sm:text-6xl"
-              {...fadeInUp}
-              transition={transition2}
-            >
-              <span className="bg-gradient-to-r from-gold-400 via-orange-500 to-gold-600 bg-clip-text text-transparent">
-                Salohiddin Sobirov
-              </span>
+
+            {/* Text Reveal Animation for Title */}
+            <motion.h1 className="text-5xl font-semibold tracking-tight text-white sm:text-5xl flex flex-wrap gap-2">
+              {titleChars.map((char, i) => (
+                <motion.span
+                  key={i}
+                  custom={i}
+                  initial="hidden"
+                  animate="visible"
+                  variants={textRevealVariants}
+                  className="bg-gradient-to-r from-gold-400 via-orange-500 to-gold-600 bg-clip-text text-transparent"
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
             </motion.h1>
+
             <motion.p
               className="text-3xl font-semibold text-slate-200/90"
               {...fadeInUp}
@@ -102,15 +126,9 @@ export default function Hero() {
             {...fadeInUp}
             transition={transition6}
           >
-            <a href="https://github.com" className="p-3 rounded-full bg-slate-800/50 hover:bg-slate-700/50 transition">
-              <Code className="w-5 h-5 text-slate-300" />
-            </a>
-            <a href="https://linkedin.com" className="p-3 rounded-full bg-slate-800/50 hover:bg-slate-700/50 transition">
-              <User className="w-5 h-5 text-slate-300" />
-            </a>
-            <a href="/contact" className="p-3 rounded-full bg-slate-800/50 hover:bg-slate-700/50 transition">
-              <MessageCircle className="w-5 h-5 text-slate-300" />
-            </a>
+
+
+
           </motion.div>
         </div>
 
